@@ -1,19 +1,32 @@
-name: hercules-staging
+# project name will be <tenant>-<environment>
+tenant: hercules
+environment: staging
 
+# deployments repo where charts and value files reside
+repo: https://github.com/musabmasood/hercules-deployments.git
+
+# any other repos this project is authorized to pull from
+otherRepos: []
+
+# sync policy
+autosync: true
+autodelete: true
+selfheal: true
+
+# cluster connection
 cluster:
-- url: xxx
-  autosync: true
-  autodelete: true
+  url: xxx
 
-repos:
+# namespaces to be created
+namespaces:
+- hercules-staging-guestbook
 
-- https://github.com/musabmasood/hercules-deployments.git
-
-
+# applications to be deployed
 applications:
 
-  guestbook:
-    namespace: hercules-staging-guestbook
-    release: hercules-staging-guestbook
-  
-  
+- name: guestbook
+  cascadeDelete: true
+  valueFiles:
+  - myfile
+  namespace: hercules-staging-guestbook
+  release: hercules-staging-guestbook
