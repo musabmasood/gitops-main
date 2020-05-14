@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hercules-staging-guestbook
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hercules-staging-guestbook
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: hercules
+  source:
+    repoURL: 'https://github.com/musabmasood/hercules-deployments.git'
+    path: charts/guestbook
+    targetRevision: HEAD
+    helm:
+      releaseName: hercules-staging-guestbook
+      valuesFiles:
+      - ../../env/stage/values/guestbook.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: hercules-staging-guestbook
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=false

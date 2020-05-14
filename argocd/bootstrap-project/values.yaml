@@ -1,0 +1,28 @@
+tenants:
+
+  hercules:
+
+    repo: paypay-deployments.git
+    clusters:
+
+    # =================
+    # STAGING
+    # =================
+    - name: staging    
+      url: https://xxx 
+      autosync: true   
+      autodelete: true
+      applications:
+      - name: guestbook
+        
+      
+
+    # =================
+    # PRODUCTION
+    # =================
+    - name: staging
+      url: https://xxx
+      autosync: false   # we dont want autosync in prod
+      autodelete: false # we dont want auto delete either
+      applications:
+      - name: guestbook

@@ -1,0 +1,19 @@
+name: hercules-staging
+
+cluster:
+- url: xxx
+  autosync: true
+  autodelete: true
+
+repos:
+
+- https://github.com/musabmasood/hercules-deployments.git
+
+
+applications:
+
+  guestbook:
+    namespace: hercules-staging-guestbook
+    release: hercules-staging-guestbook
+  
+  
