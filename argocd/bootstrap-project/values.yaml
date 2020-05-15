@@ -46,7 +46,7 @@ cluster:
   # these will be ignored if cluster.apiServer = local
   config:
     username: admin
-    password: password
+    password: password # keep settings like this one encrypted as secrets
 
 # list of namespaces to be created, this is needed so applications can be deployed into them
 namespaces:
