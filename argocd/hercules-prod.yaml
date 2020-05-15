@@ -5,7 +5,8 @@ projects:
     environment: prod 
     description: This the HERCULES staging environment
     repo: https://github.com/musabmasood/hercules-deployments.git
-    otherRepos: []
+    otherRepos:
+    - https://github.com/helm/charts.git
     autosync: true
     autodelete: true
     selfheal: true
