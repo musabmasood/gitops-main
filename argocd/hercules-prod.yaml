@@ -23,6 +23,6 @@ projects:
       cascadeDelete: true
       namespace: hercules-prod
       repo: https://github.com/helm/charts.git
-      path: stable/nginx-ingress
+      chart: stable/nginx-ingress
       release: hercules-nginx
 
