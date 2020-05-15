@@ -1,6 +1,6 @@
 projects:
   hercules-prod:
-    enabled: false
+    enabled: true
     tenant: hercules
     environment: prod 
     description: This the HERCULES staging environment
