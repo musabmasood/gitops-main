@@ -10,6 +10,9 @@ spec:
     repoURL: https://github.com/musabmasood/gitops-main.git
     targetRevision: HEAD
     path: argocd/helm-bootstrap-projects
+    helm:
+      valueFiles:
+      - ../zelda-staging.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
