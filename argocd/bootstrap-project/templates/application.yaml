@@ -30,5 +30,13 @@ spec:
   destination:
     server: {{ $root.Values.cluster.url | quote }}
     namespace: {{ $item.namespace | default $item.name | quote }}
+  syncPolicy:
+{{- if $root.Values.autosync }}
+    automated:
+      prune: {{ $root.Values.autodelete }}
+      selfHeal: {{ $root.Values.selfheal }}
+    syncOptions:
+    - Validate=false # disables resource validation (equivalent to 'kubectl apply --validate=true')
+{{- end }}
 {{- end }}
 {{- end }}
