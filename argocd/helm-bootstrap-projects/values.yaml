@@ -58,7 +58,7 @@ projects:
 
     # list of namespaces to be created, this is needed so applications can be deployed into them
     namespaces:
-    - hercules-staging-guestbook
+    - hercules-staging-guestbook2
 
     # all applications to be deployed to the cluster
     applications:
@@ -84,7 +84,7 @@ projects:
       # namespace where the application needs to be deployed
       # if ommitted, the namespace will be "guestbook" based on the application name as convention
       # note: all namespaces must be explicitly created using the namespaces list
-      namespace: hercules-staging-guestbook
+      namespace: hercules-staging-guestbook2
 
       # release name used in helm templating
       # if ommitted, will be set to "guestbook" based on the application name as convention
