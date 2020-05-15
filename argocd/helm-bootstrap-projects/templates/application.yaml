@@ -1,0 +1,48 @@
+{{- range $project, $settings := .Values.projects }}
+{{- if and $settings.applications $settings.enabled }}
+{{- range $application := $settings.applications }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ $project }}-{{ $application.name }}"
+  namespace: argocd
+{{- if $application.cascadeDelete }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+{{- end }}
+spec:
+  project: "{{ $project }}"
+  source:
+    repoURL: {{ $application.repo | default $settings.repo | quote }}
+    path: {{ $application.chart | default (printf "charts/%s" $application.name) | quote }}
+    targetRevision: {{ $application.ref | default "HEAD" | quote }}
+    helm:
+      releaseName: {{ $application.release | default $application.name | quote }}
+      valuesFiles:
+{{- if $application.valueFiles }}
+      {{- range $application.valueFiles }}
+      - "../../env/{{ $settings.environment }}/values/{{ . }}"
+      {{- end }}
+{{- else }}
+      - "../../env/{{ $settings.environment }}/values/{{ $application.name }}.yaml"
+{{- end }}
+  destination:
+{{- if eq $settings.cluster.apiServer "local" }}
+    server: "https://kubernetes.default.svc"
+{{- else }}
+    server: {{ $settings.cluster.apiServer | quote }}
+{{- end }}
+    namespace: {{ $application.namespace | default $application.name | quote }}
+  syncPolicy:
+{{- if $settings.autosync }}
+    automated:
+      prune: {{ $settings.autodelete }}
+      selfHeal: {{ $settings.selfheal }}
+    syncOptions:
+    - Validate=true
+{{- end }}
+
+{{- end }} 
+{{- end }}
+{{- end }}

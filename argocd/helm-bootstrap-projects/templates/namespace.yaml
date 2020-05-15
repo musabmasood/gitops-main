@@ -1,0 +1,11 @@
+{{- range $project, $settings := .Values.projects }}
+{{- if and $settings.enabled $settings.namespaces }}
+{{- range $item := $settings.namespaces -}}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $item }}
+{{- end }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,92 @@
+# ALL PROJECTS TO GO UNDER THIS KEY
+projects:
+
+  # key is the name of the project 
+  hercules-staging:
+
+    # enable or not this project and applications
+    enabled: true
+
+    # tenant name can be anything
+    tenant: hercules
+
+    # environment name will be used in several other properties such as value files and cluster names
+    environment: staging 
+
+    # description about this project
+    description: This the hercules staging environment
+
+    # default git repo where helm charts and their environment specific values and secrets are to be found
+    # we follow the convention over configuration approach for the repo as follows:
+    # <repo>.git/
+    #   /charts                               # all helm charts go here
+    #     /<some-helm-chart>                  
+    #   /env                                  # will contain all environment specific value and secret files
+    #     /<environment>                      # environment name must match what you define here
+    #       /values                           # generic value files
+    #         /<application-name>.yaml        # will be passed to the <application> with --values helm flag
+    #       /secrets                          # all encrypted value files usually used for secrets
+    #         /<application-name>.yaml        # will be passed to the <application> with --values helm flag
+    repo: https://github.com/musabmasood/hercules-deployments.git
+
+    # any other git repos this project is authorized to pull from
+    otherRepos: []
+
+    # sync policy for all applications deployed on the cluster
+    # enable autosync for all applications in the cluster
+    autosync: true
+
+    # deleting a resource from git will result in deletion of if from the cluster (ignored if autosync=false)
+    autodelete: true
+
+    # manual changes to the resources will be automatically reverted to the last sync with git (ignored if autosync=false)
+    selfheal: true
+
+    # cluster where the applications will be deployed to
+    cluster:
+
+      # address of the api server
+      # set to "local" if you want to use argocd's own cluster "https://kubernetes.default.svc"
+      # otherwise set to the http address of the apiServer e.g. https://some.cluster.com:443
+      apiServer: local
+
+      # set cluster connection settings (in yaml) based on https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
+      # these will be ignored if cluster.apiServer = local
+      # config:
+      #   username: admin
+      #   password: password # keep settings like this one encrypted as secrets
+
+    # list of namespaces to be created, this is needed so applications can be deployed into them
+    namespaces:
+    - hercules-staging-guestbook
+
+    # all applications to be deployed to the cluster
+    applications:
+
+    # example helm chart "guestbook"
+    - name: guestbook
+
+      # delete all child applications when this one is deleted
+      cascadeDelete: true
+
+      # pull helm chart from a repo other than the default repo
+      # repo: https://github.com/some/other-repo.git
+      
+      # path to the chart in the repo
+      # if ommitted, the value will be <repo>/charts/guesbook by convention
+      # chart: charts/guestbook
+
+      # list of value files relative to the helm chart in the same repo
+      # if ommitted, the value file passed would be <repo>/env/staging/values/guestbook.yaml by convention
+      # valueFiles:
+      # - myfile
+
+      # namespace where the application needs to be deployed
+      # if ommitted, the namespace will be "guestbook" based on the application name as convention
+      # note: all namespaces must be explicitly created using the namespaces list
+      namespace: hercules-staging-guestbook
+
+      # release name used in helm templating
+      # if ommitted, will be set to "guestbook" based on the application name as convention
+      release: hercules-staging-guestbook
+

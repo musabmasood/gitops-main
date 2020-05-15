@@ -1,0 +1,36 @@
+{{- range $project, $settings := .Values.projects }}
+{{- if $settings.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ $project }}
+  namespace: argocd
+spec:
+  description: {{ $settings.description }}
+  sourceRepos:
+  - {{ $settings.repo }}
+{{- range $settings.otherRepos }}
+  - "{{ . }}"
+{{- end }}
+  destinations:
+  - namespace: '*'
+{{- if eq $settings.cluster.apiServer "local" }}
+    server: "https://kubernetes.default.svc"
+{{- else }}
+    server: {{ $settings.cluster.apiServer | quote }}
+{{- end }}
+  roles:
+  - name: read-only
+    description: read only access
+    policies:
+    - p, proj:{{ $project }}:read-only, applications, get, hercules/*, allow
+    groups:
+    - my-oidc-group
+  - name: sync-power
+    description: Sync privileges for guestbook-dev
+    policies:
+    - p, proj:{{ $project }}:sync-power, applications, sync, hercules/*, allow
+    jwtTokens:
+    - iat: 1535390316
+{{- end }}
+{{- end }}
