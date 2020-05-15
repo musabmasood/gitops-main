@@ -16,10 +16,12 @@ projects:
     - hercules-prod
     applications:
     - name: guestbook
+      enabled: true
       cascadeDelete: true
       namespace: hercules-prod
       release: hercules-prod
     - name: redis
+      enabled: true
       cascadeDelete: true
       repo: https://github.com/helm/charts.git
       chart: stable/redis

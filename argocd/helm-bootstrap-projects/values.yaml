@@ -66,6 +66,11 @@ projects:
     # example helm chart "guestbook"
     - name: guestbook
 
+      # deploy this application or not
+      # WARNING: if you remove this key and autosync and autodelete is turned on,
+      # then the application will be deleted!
+      enabled: true
+
       # delete all child applications when this one is deleted
       cascadeDelete: true
 

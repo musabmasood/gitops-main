@@ -15,6 +15,7 @@ projects:
     - zelda-staging
     applications:
     - name: wordpress
+      enabled: true
       cascadeDelete: true
       namespace: zelda-staging
       release: zelda-wp
