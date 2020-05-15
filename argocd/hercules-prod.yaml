@@ -1,0 +1,21 @@
+projects:
+  hercules-prod:
+    enabled: false
+    tenant: hercules
+    environment: prod 
+    description: This the HERCULES staging environment
+    repo: https://github.com/musabmasood/hercules-deployments.git
+    otherRepos: []
+    autosync: true
+    autodelete: true
+    selfheal: true
+    cluster:
+      apiServer: local
+    namespaces:
+    - hercules-prod
+    applications:
+    - name: guestbook
+      cascadeDelete: true
+      namespace: hercules-prod
+      release: hercules-prod
+
