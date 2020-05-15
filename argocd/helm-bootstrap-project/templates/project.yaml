@@ -12,7 +12,11 @@ spec:
 {{- end }}
   destinations:
   - namespace: '*'
-    server: https://kubernetes.default.svc
+{{- if eq .Values.cluster.apiServer "local" }}
+    server: "https://kubernetes.default.svc"
+{{- else }}
+    server: {{ .Values.cluster.apiServer | quote }}
+{{- end }}
   roles:
   - name: read-only
     description: read only access
