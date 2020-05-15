@@ -1,6 +1,7 @@
 # project name will be <tenant>-<environment>
 tenant: hercules
 environment: staging
+description: This the hercules staging environment
 
 # deployments repo where charts and value files reside
 repo: https://github.com/musabmasood/hercules-deployments.git
@@ -10,7 +11,7 @@ otherRepos: []
 
 # sync policy
 autosync: true
-autodelete: true
+autodelete: true 
 selfheal: true
 
 # cluster connection
