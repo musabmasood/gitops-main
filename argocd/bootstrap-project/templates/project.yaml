@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .Values.tenant }}-{{ .Values.environment }}
+  namespace: argocd
+spec:
+  description: {{ .Values.description }}
+  sourceRepos:
+  - {{ .Values.repo }}
+{{- range .Values.otherRepos }}
+  - "{{ . }}"
+{{- end }}
+  destinations:
+  - namespace: '*'
+    server: https://kubernetes.default.svc
+  roles:
+  - name: read-only
+    description: read only access
+    policies:
+    - p, proj:hercules:read-only, applications, get, hercules/*, allow
+    groups:
+    - my-oidc-group
+  - name: sync-power
+    description: Sync privileges for guestbook-dev
+    policies:
+    - p, proj:hercules:sync-power, applications, sync, hercules/*, allow
+    jwtTokens:
+    - iat: 1535390316

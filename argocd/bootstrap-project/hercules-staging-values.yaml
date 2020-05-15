@@ -16,7 +16,10 @@ selfheal: true
 
 # cluster connection
 cluster:
-  url: xxx
+  apiServer: https://myserver.com
+  config: # https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
+    username: admin
+    password: password
 
 # namespaces to be created
 namespaces:
@@ -31,3 +34,4 @@ applications:
   - myfile
   namespace: hercules-staging-guestbook
   release: hercules-staging-guestbook
+
