@@ -10,7 +10,7 @@ spec:
   sourceRepos:
   - {{ $settings.repo }}
 {{- range $settings.otherRepos }}
-  - "{{ . }}"
+  - {{ . }}
 {{- end }}
   destinations:
   - namespace: '*'
