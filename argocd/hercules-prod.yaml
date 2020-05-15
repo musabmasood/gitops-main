@@ -18,4 +18,10 @@ projects:
       cascadeDelete: true
       namespace: hercules-prod
       release: hercules-prod
+    - name: nginx
+      cascadeDelete: true
+      namespace: hercules-prod
+      repo: https://github.com/helm/charts.git
+      path: stable/nginx-ingress
+      release: hercules-nginx
 
