@@ -5,7 +5,7 @@ projects:
   hercules-staging:
 
     # enable or not this project and applications
-    enabled: true
+    enabled: false
 
     # tenant name can be anything
     tenant: hercules
