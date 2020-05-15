@@ -1,7 +1,9 @@
+{{- if .Values.namespaces }}
 {{- range $item := .Values.namespaces -}}
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ $item }}
-{{- end -}}
+{{- end }}
+{{- end }}
