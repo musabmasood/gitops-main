@@ -21,7 +21,7 @@ projects:
       namespace: hercules-prod
       release: hercules-prod
     - name: redis
-      enabled: true
+      enabled: false
       cascadeDelete: true
       repo: https://github.com/helm/charts.git
       chart: stable/redis
