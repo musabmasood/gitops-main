@@ -44,9 +44,9 @@ cluster:
 
   # set cluster connection settings (in yaml) based on https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
   # these will be ignored if cluster.apiServer = local
-  config:
-    username: admin
-    password: password # keep settings like this one encrypted as secrets
+  # config:
+  #   username: admin
+  #   password: password # keep settings like this one encrypted as secrets
 
 # list of namespaces to be created, this is needed so applications can be deployed into them
 namespaces:
