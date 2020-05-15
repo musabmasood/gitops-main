@@ -1,6 +1,6 @@
 projects:
   zelda-staging:
-    enabled: true
+    enabled: false
     tenant: zelda
     environment: staging 
     description: This the ZELDA staging environment
