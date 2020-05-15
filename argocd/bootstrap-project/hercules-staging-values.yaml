@@ -16,7 +16,7 @@ selfheal: true
 
 # cluster connection
 cluster:
-  apiServer: https://myserver.com
+  apiServer: local
   config: # https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
     username: admin
     password: password
