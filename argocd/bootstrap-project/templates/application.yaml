@@ -36,7 +36,7 @@ spec:
       prune: {{ $root.Values.autodelete }}
       selfHeal: {{ $root.Values.selfheal }}
     syncOptions:
-    - Validate=false # disables resource validation (equivalent to 'kubectl apply --validate=true')
+    - Validate=true
 {{- end }}
 {{- end }}
 {{- end }}
