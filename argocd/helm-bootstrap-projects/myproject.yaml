@@ -1,0 +1,25 @@
+# all environments for "myproject"
+projects:
+  
+  # staging environment
+  myproject-staging:
+    enabled: true
+    tenant: myproject
+    environment: staging
+    description: myproject staging environment
+    repo: https://github.com/musabmasood/gitops-myproject-k8s.git
+    otherRepos:
+    - https://github.com/helm/charts.git
+    autosync: true
+    autodelete: true
+    selfheal: true
+    cluster:
+      apiServer: local
+    namespaces:
+    - myproject-staging
+    applications:
+    - name: helm-myapp
+      enabled: true
+      cascadeDelete: true
+      namespace: myproject-staging
+      release: myapp
