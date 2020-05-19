@@ -19,18 +19,18 @@ spec:
 {{- else }}
     server: {{ $settings.cluster.apiServer | quote }}
 {{- end }}
-  roles:
-  - name: read-only
-    description: read only access
-    policies:
-    - p, proj:{{ $project }}:read-only, applications, get, hercules/*, allow
-    groups:
-    - my-oidc-group
-  - name: sync-power
-    description: Sync privileges for guestbook-dev
-    policies:
-    - p, proj:{{ $project }}:sync-power, applications, sync, hercules/*, allow
-    jwtTokens:
-    - iat: 1535390316
+  # roles:
+  # - name: {{ $project }}-dev
+  #   description: Developer role for {{ $project }} project
+  #   groups:
+  #   - email:*
+  #   policies:
+  #   - p, proj:{{ $project }}:read-only, applications, get, {{ $project }}/*, allow
+  # - name: sync-power
+  #   description: Sync privileges for guestbook-dev
+  #   policies:
+  #   - p, proj:{{ $project }}:sync-power, applications, sync, hercules/*, allow
+  #   jwtTokens:
+  #   - iat: 1535390316
 {{- end }}
 {{- end }}

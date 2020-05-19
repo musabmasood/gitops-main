@@ -6,14 +6,6 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/musabmasood/gitops-main.git
-    targetRevision: HEAD
-    path: argocd/helm-bootstrap-projects
-    helm:
-      valueFiles:
-      - ../zelda-staging.yaml
-      - ../hercules-prod.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
@@ -23,3 +15,10 @@ spec:
       selfHeal: true
     syncOptions:
     - Validate=true
+  source:
+    repoURL: https://github.com/musabmasood/gitops-main.git
+    targetRevision: HEAD
+    path: argocd/helm-bootstrap-projects
+    helm:
+      valueFiles:
+      - myproject.yaml
