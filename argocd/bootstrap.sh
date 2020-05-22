@@ -1,13 +1,15 @@
 #!/bin/bash
 
-echo "Bootstrapping projects from the ./projects/ dir"
+echo "INFO: Bootstrapping all projects from the ./projects/ dir"
 for f in ./projects/*; do
-    echo "bootstrapping $f"
+
+    PROJECT_NAME=$(basename $f .yaml)
+    echo "bootstrapping project '$PROJECT_NAME' from file $f"
     cat <<EOF | kubectl apply -f -
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: $p
+  name: $PROJECT_NAME
   namespace: argocd
 spec:
   project: default
