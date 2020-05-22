@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# declare your project name here and then create a <project>.yaml file in the same directory
-declare -a projects=("myproject")
-
-for p in "${projects[@]}"
-do
-echo "Creating ArgoCD application for '$p'"
-cat <<EOF | kubectl apply -f -
+echo "Bootstrapping projects from the ./projects/ dir"
+for f in ./projects/*; do
+    echo "bootstrapping $f"
+    cat <<EOF | kubectl apply -f -
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -29,6 +26,6 @@ spec:
     path: argocd/helm-bootstrap-projects
     helm:
       valueFiles:
-      - ../$p.yaml
+      - ../$f
 EOF
 done
